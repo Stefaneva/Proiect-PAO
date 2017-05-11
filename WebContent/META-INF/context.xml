@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context path="/Proiect-PAO">
+	<Resource name="jdbc/myDB"
+      auth="Container"
+	  type="javax.sql.DataSource"
+	  username="eva_stefan"
+	  password="darkdragonses9"
+	  driverClassName="oracle.jdbc.driver.OracleDriver"
+      url="jdbc:oracle:thin:@193.226.51.37:1521:o11g"
+	  maxActive="15"
+	  maxIdle="3" />
+</Context>
