@@ -38,6 +38,7 @@ public class ProfileServlet extends HttpServlet {
 			A.add(userInfo.getEmail());
 			A.add(userInfo.getAddress());
 			A.add(String.valueOf(userInfo.getPhone()));
+			A.add(userInfo.getUserRole());
 			request.getSession().setAttribute("UserDetails",A);
 			request.getRequestDispatcher("profile.jsp").forward(request, response);
 		} 

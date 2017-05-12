@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import dao.impl.UserDaoImpl;
+import entity.User;
 import validators.LoginValidator;
 
 /**
@@ -42,6 +45,12 @@ public class LoginServlet extends HttpServlet {
 			if(resultID!=0)
 			{
 				HttpSession session=request.getSession(true);
+				
+				UserDaoImpl userDaoImpl=new UserDaoImpl();
+				User userInfo=userDaoImpl.getUserInfo(resultID,connection);
+				String role=userInfo.getUserRole();
+				session.setAttribute("userRole",role);
+				
 				session.setAttribute("currentUser", userName);
 				session.setAttribute("UserID",resultID);
 				request.getRequestDispatcher("index.jsp").include(request, response);
@@ -62,6 +71,15 @@ public class LoginServlet extends HttpServlet {
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 }

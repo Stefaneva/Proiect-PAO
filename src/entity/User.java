@@ -8,8 +8,6 @@ public class User {
 	private int Id;
 	private String UserRole;
 	private int phone;
-	
-	
 	public User(){
 		
 	}
