@@ -23,8 +23,9 @@
             {
     %>
 	    Welcome back <%= currentUser %>
-		<a href="LogoutServlet">Logout</a>|  
-		<a href="ProfileServlet">Profile</a>  
+		<a href="LogoutServlet">Logout</a>  
+		<a href="ProfileServlet">Profile</a>
+		<a href="ProductServlet">Products</a>  
 	<%
 		}
     %>

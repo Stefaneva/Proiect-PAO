@@ -10,11 +10,13 @@
 <body>
 	<%
 	ArrayList<String>  userDetails=(ArrayList<String>) request.getSession().getAttribute("UserDetails");
+	String role=(String) request.getSession().getAttribute("userRole");
 	%>
 	<h2>Name: <%= userDetails.get(0).toString() %></h2>
 	<h2>Email: <%= userDetails.get(1).toString() %></h2>
 	<h2>Address: <%= userDetails.get(2).toString() %></h2>
 	<h2>Phone: <%= userDetails.get(3).toString() %></h2>
+	<h2>Role: <%= role %></h2>
 	<h3><a href="index.jsp">Back</a></h3>
 </body>
 </html>

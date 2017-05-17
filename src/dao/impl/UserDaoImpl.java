@@ -13,9 +13,6 @@ import entity.*;
 import dao.*;
 
 public class UserDaoImpl implements UserDAO{
-	@Resource(name = "jdbc/myDB")
-    private DataSource dbRes;
-	
 	
 	public List<User> getAllUsers()
 	{
@@ -51,42 +48,11 @@ public class UserDaoImpl implements UserDAO{
 		}
 		return userList;
 	}
-	/*
-	public User getUserInfo(int ID)
-	{
-		User userInfo=null;
-		try{
-			Connection connection;
-			MyDBConnection mdbc=new MyDBConnection();
-			mdbc.setConnection();
-			connection=mdbc.getConnection();
-//			String sql="select user_name,email,address from users_project "//
-//					+ "where id="+Integer.toString(ID);
-			String sql="select UserName,Email,Address,Phone from userspao"//
-					+ " where id="+Integer.toString(ID);
-			PreparedStatement pstm=connection.prepareStatement(sql);
-			ResultSet rs=pstm.executeQuery();
-			userInfo=new User();
-			while(rs.next())
-			{
-				userInfo.setName(rs.getString("UserName"));
-				userInfo.setEmail(rs.getString("Email"));
-				userInfo.setAddress(rs.getString("Address"));
-				userInfo.setPhone(Integer.parseInt(rs.getString("Phone")));
-			}
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return userInfo;
-	}
-	*/
 	public User getUserInfo(int ID, Connection connection)
 	{
 		User userInfo=null;
 		try{
-			String sql="select UserName,Email,Address,Phone from userspao"//
+			String sql="select UserName,Email,Address,Phone,Userrole from userspao"//
 					+ " where id="+Integer.toString(ID);
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			ResultSet rs=pstm.executeQuery();
@@ -97,6 +63,7 @@ public class UserDaoImpl implements UserDAO{
 				userInfo.setEmail(rs.getString("Email"));
 				userInfo.setAddress(rs.getString("Address"));
 				userInfo.setPhone(Integer.parseInt(rs.getString("Phone")));
+				userInfo.setUserRole(rs.getString("Userrole"));
 			}
 		}
 		catch(SQLException e)
@@ -121,6 +88,5 @@ public class UserDaoImpl implements UserDAO{
 		{
 			e.printStackTrace();
 		}
-		
 	}
 }
