@@ -11,5 +11,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Eva/Downloads/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-export-poi-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-portlet-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

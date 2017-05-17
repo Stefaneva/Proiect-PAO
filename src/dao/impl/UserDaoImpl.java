@@ -13,8 +13,6 @@ import entity.*;
 import dao.*;
 
 public class UserDaoImpl implements UserDAO{
-	@Resource(name = "jdbc/myDB")
-    private DataSource dbRes;
 	
 	public List<User> getAllUsers()
 	{
