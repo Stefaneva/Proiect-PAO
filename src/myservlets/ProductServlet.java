@@ -36,10 +36,11 @@ public class ProductServlet extends HttpServlet {
 			String productName=(String)session.getAttribute("productName");
 			String priceMin=(String)session.getAttribute("priceMin");
 			String priceMax=(String)session.getAttribute("priceMax");
-			if(priceMin!=null||productName!=null||priceMax!=null)
-				productList=(ArrayList<Products>)productDAO.getProductsByCriteria(productName, priceMin, priceMax, connection);
-			else
-				productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
+			productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
+//			if(priceMin!=null||productName!=null||priceMax!=null)
+				if((String)session.getAttribute("searchForm")!=null)productList=(ArrayList<Products>)productDAO.getProductsByCriteria(productName, priceMin, priceMax, connection);
+//			else
+//				productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
 			request.getSession().setAttribute("productList",productList);
 			request.getRequestDispatcher("products.jsp").forward(request, response);
 		}
