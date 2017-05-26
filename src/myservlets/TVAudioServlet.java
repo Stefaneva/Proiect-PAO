@@ -15,12 +15,12 @@ public class TVAudioServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("categories.jsp").include(request, response);
+		HttpSession session=request.getSession(true);
+		session.setAttribute("category", "tv/audio");
+		response.sendRedirect("ProductServlet");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
-		String category=(String)request.getParameter("category");
-		session.setAttribute("category", "tv/audio");
-		response.sendRedirect("ProductServlet");
+		doGet(request,response);
 	}
 }
