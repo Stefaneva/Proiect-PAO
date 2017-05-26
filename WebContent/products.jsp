@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "categories.jsp" />
 	<jsp:include page="searchProducts.jsp" />
 	<div id = "products-container">
 	<h2>Products </h2><br>
@@ -19,12 +20,13 @@
   			<th> Descriere </th>
   			<th> Cumpara </th>
   		</tr>
-  		<c:forEach items="${productList}" var="product">
+  		<c:forEach items="${productList}" var="product" >
 		    <tr>
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
 		      <td><a href = "detaliiProdus.jsp">Vezi detalii</a></td>
 		      <td><a href= " cosCumparaturi.jsp">Cumpara</a></td>
+		      
 		    </tr>
   		</c:forEach>
 	</table>

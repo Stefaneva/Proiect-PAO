@@ -15,11 +15,12 @@ public class ProductDaoImpl implements ProductDAO{
 	public Products getProductInfo(int ID,Connection connection){
 		Products productInfo=null;
 		try{
-			String SQL="Select Denumire,Stoc,Pret,Descriere from produsPAO";
+			String SQL="Select Idprod,Denumire,Stoc,Pret,Descriere from produsPAO";
 			PreparedStatement pstm=connection.prepareStatement(SQL);
 			ResultSet rs=pstm.executeQuery();
 			productInfo=new Products();
 			while(rs.next()){
+				productInfo.setIdProd(Integer.parseInt(rs.getString("Idprod")));
 				productInfo.setDenumire(rs.getString("Denumire"));
 				productInfo.setStoc(rs.getString("Stoc"));
 				productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
@@ -35,12 +36,13 @@ public class ProductDaoImpl implements ProductDAO{
 	public List<Products> getAllProducts(Connection connection){
 		List<Products> productList=null;
 		try{
-			String SQL="Select Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO";
+			String SQL="Select Idprod,Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO";
 			PreparedStatement pstm=connection.prepareStatement(SQL);
 			ResultSet rs=pstm.executeQuery();
 			productList=new ArrayList<>();
 			while(rs.next()){
 				Products productInfo=new Products();
+				productInfo.setIdProd(Integer.parseInt(rs.getString("Idprod")));
 				productInfo.setDenumire(rs.getString("Denumire"));
 				productInfo.setStoc(rs.getString("Stoc"));
 				productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
@@ -61,11 +63,11 @@ public class ProductDaoImpl implements ProductDAO{
 		try{
 			System.out.println(name+" "+priceMin+" "+priceMax);
 			productList=new ArrayList<>();
-			String sql="select Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO ";
+			String sql="select Idprod,Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO ";
 			if(name!=""&&priceMin!=""&&priceMax!="")
 				sql+=" where lower(Denumire) like '%"+name+"%' and Pret between "+priceMin+" and "+priceMax;
 			if(name==""&&priceMin!=""&&priceMax!="")
-				sql+="where Pret in("+priceMin+","+priceMax+") ";
+				sql+="where Pret between "+priceMin+" and "+priceMax;
 			if(name!=""&&priceMin!=""&&priceMax=="")
 				sql+="where lower(Denumire) like '%"+name+"%' and Pret >= "+priceMin;
 			if(name!=""&&priceMax!=""&&priceMin=="")
@@ -81,6 +83,7 @@ public class ProductDaoImpl implements ProductDAO{
 			ResultSet rs=pstm.executeQuery();
 			while(rs.next()){
 				Products productInfo=new Products();
+				productInfo.setIdProd(Integer.parseInt(rs.getString("Idprod")));
 				productInfo.setDenumire(rs.getString("Denumire"));
 				productInfo.setStoc(rs.getString("Stoc"));
 				productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
@@ -94,6 +97,34 @@ public class ProductDaoImpl implements ProductDAO{
 		{
 			e.printStackTrace();
 		}
+		return productList;
+	}
+	
+
+public List<Products> getProductsByCategory(String category, Connection connection) {
+	List<Products> productList = null;
+	try {
+		productList=new ArrayList<>();
+		String sql = "select Idprod,Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO ";
+		if(category != "")
+			sql += " where lower(Categorie) like '%"+category+"%'";
+		System.out.println(sql);
+		PreparedStatement pstm = connection.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		while(rs.next()) {
+			Products productInfo = new Products();
+			productInfo.setIdProd(Integer.parseInt(rs.getString("Idprod")));
+			productInfo.setDenumire(rs.getString("Denumire"));
+			productInfo.setStoc(rs.getString("Stoc"));
+			productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
+			productInfo.setCategorie(rs.getString("Categorie"));
+			productInfo.setNrStoc(Integer.parseInt(rs.getString("NrStoc")));
+			productInfo.setDescriere(rs.getString("Descriere"));
+			productList.add(productInfo);
+		}
+	} catch(SQLException e) {
+		e.printStackTrace();
+	}
 		return productList;
 	}
 }
