@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id = "products-container">
-	<h2>Products: </h2><br>
+	<jsp:include page="searchProducts.jsp" />
 	<div id = "products-container">
 	<h2>Products </h2><br>
 	<table>
