@@ -96,4 +96,31 @@ public class ProductDaoImpl implements ProductDAO{
 		}
 		return productList;
 	}
+	
+
+public List<Products> getProductsByCategory(String category, Connection connection) {
+	List<Products> productList = null;
+	try {
+		productList=new ArrayList<>();
+		String sql = "select Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO ";
+		if(category != "")
+			sql += " where lower(Categorie) like '%"+category+"%'";
+		System.out.println(sql);
+		PreparedStatement pstm = connection.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		while(rs.next()) {
+			Products productInfo = new Products();
+			productInfo.setDenumire(rs.getString("Denumire"));
+			productInfo.setStoc(rs.getString("Stoc"));
+			productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
+			productInfo.setCategorie(rs.getString("Categorie"));
+			productInfo.setNrStoc(Integer.parseInt(rs.getString("NrStoc")));
+			productInfo.setDescriere(rs.getString("Descriere"));
+			productList.add(productInfo);
+		}
+	} catch(SQLException e) {
+		e.printStackTrace();
+	}
+		return productList;
+	}
 }
