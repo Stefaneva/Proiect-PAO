@@ -39,8 +39,8 @@ public class ProductServlet extends HttpServlet {
 			String category = (String)session.getAttribute("category");
 			productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
 //			if(priceMin!=null||productName!=null||priceMax!=null)
-				if((String)session.getAttribute("searchForm")!=null)productList=(ArrayList<Products>)productDAO.getProductsByCriteria(productName, priceMin, priceMax, connection);
 				if(category != null) productList = (ArrayList<Products>)productDAO.getProductsByCategory(category, connection);
+				if((String)session.getAttribute("searchForm")!=null)productList=(ArrayList<Products>)productDAO.getProductsByCriteria(productName, priceMin, priceMax, connection);
 //			else
 //				productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
 			request.getSession().setAttribute("productList",productList);

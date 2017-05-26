@@ -14,13 +14,12 @@ public class TelefoaneTableteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("categories.jsp").include(request, response);
+		HttpSession session=request.getSession(true);
+		session.setAttribute("category", "telefoane/tablete");
+		response.sendRedirect("ProductServlet");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
-		String category=(String)request.getParameter("category");
-		session.setAttribute("category", "telefoane/tablete");
-		response.sendRedirect("ProductServlet");
+		doGet(request,response);
 	}
 }
