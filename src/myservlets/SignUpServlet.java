@@ -1,6 +1,7 @@
 package myservlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 
 import dao.impl.UserDaoImpl;
 import entity.User;
+import validators.SignUpValidator;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -33,17 +35,33 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection connection=null;
-		try {
-			connection = dbRes.getConnection();
-			User userInfo=new User(request.getParameter("userName"),request.getParameter("password"),//
-					request.getParameter("email"),request.getParameter("address"),//
-					Integer.parseInt(request.getParameter("phone")),request.getParameter("role"));
-			UserDaoImpl userDaoImpl=new UserDaoImpl();
-			userDaoImpl.saveUser(userInfo, connection);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+		SignUpValidator validator=new SignUpValidator();
+		String userName=(String)request.getParameter("userName");
+		String password=(String)request.getParameter("password");
+		String email=(String)request.getParameter("email");
+		String phone=(String)request.getParameter("phone");
+//		String role=(String)request.getParameter("role");
+		String address=(String)request.getParameter("address");
+		if(validator.validate(userName, email, phone, password, address))
+		{
+			try {
+				connection = dbRes.getConnection();
+				User userInfo=new User(userName,password,email,address,Integer.parseInt(phone));
+				UserDaoImpl userDaoImpl=new UserDaoImpl();
+				userDaoImpl.saveUser(userInfo, connection);
+				connection.close();
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		catch (SQLException e) {
-			e.printStackTrace();
+		else{
+			PrintWriter out=response.getWriter();
+			request.getRequestDispatcher("signUp.jsp").include(request, response);  
+			out.print("Field empty or not valid");
+			out.close();
+			return;
 		}
 	}
 

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="searchProducts.jsp" />
 	<h2>Products: </h2><br>
 	<table>
   		<c:forEach items="${productList}" var="product">

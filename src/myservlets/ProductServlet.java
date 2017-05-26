@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dao.impl.ProductDaoImpl;
@@ -25,11 +26,20 @@ public class ProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection connection=null;
+		HttpSession session=null;
+		ArrayList<Products> productList;
 		try {
-			ArrayList<Products> productList=new ArrayList<>();
-			connection = dbRes.getConnection();	
 			ProductDaoImpl productDAO=new ProductDaoImpl();
-			productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
+			session=request.getSession();
+			connection = dbRes.getConnection();
+			productList=new ArrayList<>();
+			String productName=(String)session.getAttribute("productName");
+			String priceMin=(String)session.getAttribute("priceMin");
+			String priceMax=(String)session.getAttribute("priceMax");
+			if(priceMin!=null||productName!=null||priceMax!=null)
+				productList=(ArrayList<Products>)productDAO.getProductsByCriteria(productName, priceMin, priceMax, connection);
+			else
+				productList=(ArrayList<Products>)productDAO.getAllProducts(connection);
 			request.getSession().setAttribute("productList",productList);
 			request.getRequestDispatcher("products.jsp").forward(request, response);
 		}
@@ -47,8 +57,6 @@ public class ProductServlet extends HttpServlet {
 				}
 		}
 	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);

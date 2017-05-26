@@ -4,17 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Edit Profile</title>
 </head>
 <body>
-	<form action="SignUpServlet" method="post">
-		<br>User Name:<input type="text" name="userName">
+	<form action="EditProfileServlet" method="post">
 		<br>Password: <input type ="password" name="password">
-		<br>E-Mail: <input type="text" name="email">
-		<br>Address: <input type="text" name="address">
+		<br>E-mail: <input type="text" name="email">
 		<br>Phone: <input type="text" name="phone">
-		
-		<br><input type="submit" value="Sign Up">
+		<br><input type="submit" value="Edit">
 	</form>
 </body>
 </html>

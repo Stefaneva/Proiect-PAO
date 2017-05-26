@@ -14,5 +14,15 @@
 	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-1.2.jar"/>
 	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-export-poi-1.2.jar"/>
 	<classpathentry kind="lib" path="E:/Java/workspace/Proiect-PAO/displaytag-1.2/displaytag-portlet-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-validator-1.6/commons-validator-1.6.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-validator-1.6/commons-validator-1.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-validator-1.6/commons-validator-1.6-sources.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-validator-1.6/commons-validator-1.6-tests.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-validator-1.6/commons-validator-1.6-test-sources.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-lang3-3.5/commons-lang3-3.5.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-lang3-3.5/commons-lang3-3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-lang3-3.5/commons-lang3-3.5-sources.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-lang3-3.5/commons-lang3-3.5-tests.jar"/>
+	<classpathentry kind="lib" path="E:/Java/WEB/commons-lang3-3.5/commons-lang3-3.5-test-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -18,5 +18,6 @@
 	<h2>Phone: <%= userDetails.get(3).toString() %></h2>
 	<h2>Role: <%= role %></h2>
 	<h3><a href="index.jsp">Back</a></h3>
+	<h3><a href="editProfile.jsp">Edit Profile</a></h3>
 </body>
 </html>
