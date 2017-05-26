@@ -65,7 +65,7 @@ public class ProductDaoImpl implements ProductDAO{
 			if(name!=""&&priceMin!=""&&priceMax!="")
 				sql+=" where lower(Denumire) like '%"+name+"%' and Pret between "+priceMin+" and "+priceMax;
 			if(name==""&&priceMin!=""&&priceMax!="")
-				sql+="where Pret in("+priceMin+","+priceMax+") ";
+				sql+="where Pret between "+priceMin+" and "+priceMax;
 			if(name!=""&&priceMin!=""&&priceMax=="")
 				sql+="where lower(Denumire) like '%"+name+"%' and Pret >= "+priceMin;
 			if(name!=""&&priceMax!=""&&priceMin=="")
