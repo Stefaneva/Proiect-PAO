@@ -14,12 +14,13 @@ public class TVAudioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(true);
-		session.setAttribute("category", "tv/audio");
-		response.sendRedirect("ProductServlet");
+		request.getRequestDispatcher("categories.jsp").include(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		HttpSession session=request.getSession(true);
+		String category=(String)request.getParameter("category");
+		session.setAttribute("category", "tv/audio");
+		response.sendRedirect("ProductServlet");
 	}
 }
