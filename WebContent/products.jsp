@@ -24,7 +24,7 @@
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
 		      <td><a href = "detaliiProdus.jsp">Vezi detalii</a></td>
-		      <td><input type="submit" value="Buy Product"></td>
+		      <td><a href= " cosCumparaturi.jsp">Cumpara</a></td>
 		    </tr>
   		</c:forEach>
 	</table>

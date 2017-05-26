@@ -59,22 +59,24 @@ public class ProductDaoImpl implements ProductDAO{
 	public List<Products> getProductsByCriteria(String name,String priceMin,String priceMax,Connection connection){
 		List<Products> productList=null;
 		try{
+			System.out.println(name+" "+priceMin+" "+priceMax);
 			productList=new ArrayList<>();
 			String sql="select Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO ";
-			if(name!=null&&priceMin!=null&&priceMax!=null)
-				sql+=" where lower(Denumire) like '%"+name+"%' and Pret in("+priceMin+","+priceMax+") ";
-			else if(name==null&&priceMin!=null&&priceMax!=null)
+			if(name!=""&&priceMin!=""&&priceMax!="")
+				sql+=" where lower(Denumire) like '%"+name+"%' and Pret between "+priceMin+" and "+priceMax;
+			if(name==""&&priceMin!=""&&priceMax!="")
 				sql+="where Pret in("+priceMin+","+priceMax+") ";
-			else if(name!=null&&priceMin!=null&&priceMax==null)
-				sql+=" where lower(Denumire) like '%"+name+"%' and Pret >= "+priceMin;
-			else if(name!=null&&priceMax!=null&&priceMin==null)
-				sql+=" where lower(Denumire) like '%"+name+"%' and Pret <= "+priceMax;
-			else if(name!=null&&priceMin==null&&priceMax==null)
-				sql+=" where lower(Denumire) like '%"+name+"%'";
-			else if(priceMin!=null&&name==null&&priceMax==null)
-				sql+=" where Pret >= "+priceMin;
-			else if(priceMax!=null&&name==null&&priceMin==null)
-				sql+=" where Pret <= "+priceMax;
+			if(name!=""&&priceMin!=""&&priceMax=="")
+				sql+="where lower(Denumire) like '%"+name+"%' and Pret >= "+priceMin;
+			if(name!=""&&priceMax!=""&&priceMin=="")
+				sql+="where lower(Denumire) like '%"+name+"%' and Pret <= "+priceMax;
+			if(name!=""&&priceMin==""&&priceMax=="")
+				sql+="where lower(Denumire) like '%"+name+"%'";
+			if(priceMin!=""&&name==""&&priceMax=="")
+				sql+="where Pret >= "+priceMin;
+			if(priceMax!=""&&name==""&&priceMin=="")
+				sql+="where Pret <= "+priceMax;
+			System.out.println(sql);
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			ResultSet rs=pstm.executeQuery();
 			while(rs.next()){

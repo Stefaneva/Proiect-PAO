@@ -26,12 +26,10 @@ public class SearchServlet extends HttpServlet {
 		String productName=(String)request.getParameter("productName");
 		String priceMin=(String)request.getParameter("priceMin");
 		String priceMax=(String)request.getParameter("priceMax");
-		if(productName.trim()!="")
-			session.setAttribute("productName", productName);
-		if(priceMin.trim()!="")
-			session.setAttribute("priceMin", priceMin);
-		if(priceMax.trim()!="")
-			session.setAttribute("priceMax", priceMax);
+		session.setAttribute("productName", productName);
+		session.setAttribute("priceMin", priceMin);
+		session.setAttribute("priceMax", priceMax);
+		session.setAttribute("searchForm","search");
 		response.sendRedirect("ProductServlet");
 	}
 
