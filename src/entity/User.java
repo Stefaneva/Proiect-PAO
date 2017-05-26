@@ -11,12 +11,12 @@ public class User {
 	public User(){
 		
 	}
-	public User(String name,String pass,String email,String address,int phone,String role){
+	public User(String name,String pass,String email,String address,int phone){
 		this.Name=name;
 		this.Password=pass;
 		this.Email=email;
 		this.Address=address;
-		this.UserRole=role;
+//		this.UserRole=role;
 		this.phone=phone;
 	}
 	

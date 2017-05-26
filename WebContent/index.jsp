@@ -21,12 +21,18 @@
             }
             else
             {
+            	String userRole=(String) session.getAttribute("userRole");
+            	
     %>
-	    Welcome back <%= currentUser %>
+	    Welcome back <%= currentUser %><br>
 		<a href="LogoutServlet">Logout</a>  
 		<a href="ProfileServlet">Profile</a>
-		<a href="ProductServlet">Products</a>  
+		<%if(userRole.equals("user")) %><a href="ProductServlet">Products</a>
+		<%if(!userRole.equals("user")) {%>
+		<a href="AddProductServlet">Add Products</a>
+		<a href="EditUserServlet">Edit User</a>
 	<%
+			}
 		}
     %>
 </body>

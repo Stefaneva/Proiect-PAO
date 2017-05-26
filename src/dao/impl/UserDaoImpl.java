@@ -72,6 +72,35 @@ public class UserDaoImpl implements UserDAO{
 		}
 		return userInfo;
 	}
+	public void updateUserInfo(int ID, Connection connection,String password,String Email,String phone){
+		try{
+			String sql=null;
+			if(password.trim()!=""){
+				sql="Update userspao set Pass='"+password+"' where id="+ID;
+				PreparedStatement pstm=connection.prepareStatement(sql);
+				pstm.executeUpdate();
+			}
+			if(Email.trim()!="")
+				{
+				sql="Update userspao set Email=? where id=?";
+				PreparedStatement pstm=connection.prepareStatement(sql);
+				pstm.setString(1, Email);
+				pstm.setString(2,Integer.toString(ID));
+				pstm.executeUpdate();
+				}
+			if(phone.trim()!=""){
+				sql="Update userspao set Phone=? where id=?";
+				PreparedStatement pstm=connection.prepareStatement(sql);
+				pstm.setInt(1, Integer.parseInt(phone));
+				pstm.setString(2,Integer.toString(ID));
+				pstm.executeUpdate();
+			}
+			System.out.println("User Updated");
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 	
 	public void saveUser(User userSaved, Connection connection)
 	{

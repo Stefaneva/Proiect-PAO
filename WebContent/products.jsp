@@ -10,6 +10,8 @@
 </head>
 <body>
 	<div id = "products-container">
+	<h2>Products: </h2><br>
+	<div id = "products-container">
 	<h2>Products </h2><br>
 	<table>
 		<tr>
