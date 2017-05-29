@@ -15,7 +15,7 @@ public class ProductDaoImpl implements ProductDAO{
 	public Products getProductInfo(int ID,Connection connection){
 		Products productInfo=null;
 		try{
-			String SQL="Select Idprod,Denumire,Stoc,Pret,Descriere from produsPAO";
+			String SQL="Select Idprod,Denumire,Stoc,Pret,Categorie,Descriere,NrStoc from produsePAO where Idprod="+Integer.toString(ID);
 			PreparedStatement pstm=connection.prepareStatement(SQL);
 			ResultSet rs=pstm.executeQuery();
 			productInfo=new Products();
@@ -24,6 +24,8 @@ public class ProductDaoImpl implements ProductDAO{
 				productInfo.setDenumire(rs.getString("Denumire"));
 				productInfo.setStoc(rs.getString("Stoc"));
 				productInfo.setPret(Integer.parseInt(rs.getString("Pret")));
+				productInfo.setCategorie(rs.getString("Categorie"));
+				productInfo.setNrStoc(Integer.parseInt(rs.getString("NrStoc")));
 				productInfo.setDescriere(rs.getString("Descriere"));
 			}
 		}
