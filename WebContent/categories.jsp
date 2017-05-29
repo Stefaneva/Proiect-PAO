@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<br><a href = "ITServlet"><span id = "it"> IT </span></a>
-	<a href = "TelefoaneTableteServlet"><span id = "telefoane/tablete" style = "margin-left: 20px;"> Telefoane/Tablete </span></a>
-	<a href = "TVAudioServlet"><span id = "tv/audio" style = "margin-left: 20px;"> TV/Audio </span></a>
+	<br><a href = "${pageContext.request.contextPath}/CategoryServlet?category=it"><span id = "it"> IT </span></a>
+	<a href = "${pageContext.request.contextPath}/CategoryServlet?category=telefoane/tablete"><span id = "telefoane/tablete" style = "margin-left: 20px;"> Telefoane/Tablete </span></a>
+	<a href = "${pageContext.request.contextPath}/CategoryServlet?category=tv/audio"><span id = "tv/audio" style = "margin-left: 20px;"> TV/Audio </span></a>
 </body>
 </html>

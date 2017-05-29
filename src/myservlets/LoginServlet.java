@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dao.impl.UserDaoImpl;
+import entity.Products;
 import entity.User;
 import validators.LoginValidator;
 
@@ -50,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 				User userInfo=userDaoImpl.getUserInfo(resultID,connection);
 				String role=userInfo.getUserRole();
 				session.setAttribute("userRole",role);
-				
+				session.setAttribute("cos", new HashMap<Products,Integer>());
 				session.setAttribute("currentUser", userName);
 				session.setAttribute("UserID",resultID);
 				request.getRequestDispatcher("index.jsp").include(request, response);
