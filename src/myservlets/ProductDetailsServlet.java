@@ -28,7 +28,6 @@ public class ProductDetailsServlet extends HttpServlet {
 		Connection connection=null;
 		HttpSession session = request.getSession();
 		String idProd = request.getParameter("produs");
-		//HashMap<Products, Integer> cos = (HashMap<Products, Integer>) session.getAttribute("cos");
 		try{
 			connection = dbRes.getConnection();
 			ProductDaoImpl productDAO=new ProductDaoImpl();

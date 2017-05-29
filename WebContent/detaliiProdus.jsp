@@ -8,9 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<c:out value="${product.key.denumire}" />
-		<c:out value="${product.key.pret}" />
-		<c:out value="${product.key.descriere}" />
-		<c:out value="${product.key.nrStoc}" />
+		<c:out value="${product.denumire}" />
+		<br><br>
+		<c:out value="${product.pret}" />
+		<br><br>
+		<c:out value="${product.descriere}" />
+		<br><br>
+		<c:out value="${product.nrStoc}" />
 </body>
 </html>
