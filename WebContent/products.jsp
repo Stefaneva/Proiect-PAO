@@ -24,7 +24,7 @@
 		    <tr>
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
-		      <td><a href = "detaliiProdus.jsp">Vezi detalii</a></td>
+		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
 		      <td><a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a></td>
 		      
 		    </tr>
