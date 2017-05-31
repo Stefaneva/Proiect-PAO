@@ -9,7 +9,7 @@
 <body>
 	<form action="AddProductServlet" method="post">
 		<br>Product Name:<input type="text" name="productName">
-		<br>Stoc: <input type ="password" name="stoc">
+		<br>Stoc: <input type ="text" name="stoc">
 		<br>Price: <input type="text" name="price">
 		<br>Category: <input type="text" name="category">
 		<br>Description: <input type="text" name="description">

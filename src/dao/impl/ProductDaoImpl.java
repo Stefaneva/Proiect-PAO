@@ -133,9 +133,9 @@ public void saveProduct(Products productSaved, Connection connection)
 {
 	try{
 		String sql="INSERT INTO PRODUSEPAO(DENUMIRE,STOC,PRET,CATEGORIE,DESCRIERE,NRSTOC)"//
-					+ " VALUES('"+productSaved.getDenumire()+"','"+productSaved.getStoc()+"','"//
-					+productSaved.getPret()+"','"+productSaved.getCategorie()+"',"+productSaved.getDescriere()+",'"//
-					+productSaved.getNrStoc()+"')";
+					+ " VALUES('"+productSaved.getDenumire()+"','"+productSaved.getStoc()+"',"//
+					+productSaved.getPret()+",'"+productSaved.getCategorie()+"','"+productSaved.getDescriere()+"',"//
+					+productSaved.getNrStoc()+")";
 		PreparedStatement pstm=connection.prepareStatement(sql);
 		pstm.executeUpdate();
 		System.out.println("SAVE PRODUCT TO DB");
