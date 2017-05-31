@@ -20,7 +20,7 @@
 		    <tr>
 		      <td><c:out value="${product.key.denumire}" />
 		      <td><c:out value="${product.key.pret}" /></td>
-		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
+		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.key.idProd}">Vezi detalii</a></td>
 		      <td><c:out value="${product.value}"></c:out></td>
 		    </tr>
   		</c:forEach>

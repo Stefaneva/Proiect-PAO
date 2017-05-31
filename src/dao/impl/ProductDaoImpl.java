@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -129,4 +128,21 @@ public List<Products> getProductsByCategory(String category, Connection connecti
 	}
 		return productList;
 	}
+
+public void saveProduct(Products productSaved, Connection connection)
+{
+	try{
+		String sql="INSERT INTO PRODUSEPAO(DENUMIRE,STOC,PRET,CATEGORIE,DESCRIERE,NRSTOC)"//
+					+ " VALUES('"+productSaved.getDenumire()+"','"+productSaved.getStoc()+"',"//
+					+productSaved.getPret()+",'"+productSaved.getCategorie()+"','"+productSaved.getDescriere()+"',"//
+					+productSaved.getNrStoc()+")";
+		PreparedStatement pstm=connection.prepareStatement(sql);
+		pstm.executeUpdate();
+		System.out.println("SAVE PRODUCT TO DB");
+	}
+	catch(SQLException e)
+	{
+		e.printStackTrace();
+	}
+}
 }

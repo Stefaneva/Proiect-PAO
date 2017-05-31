@@ -11,9 +11,9 @@ public class Products {
 	public Products(){
 		
 	}
-	public Products(int idProd,String denumire,String stoc,int pret,String categorie,String descriere,int nrStoc)
+	public Products(String denumire,String stoc,int pret,String categorie,String descriere,int nrStoc)
 	{
-		this.idProd=idProd;
+		//this.idProd=idProd;
 		this.denumire=denumire;
 		this.stoc=stoc;
 		this.pret=pret;
