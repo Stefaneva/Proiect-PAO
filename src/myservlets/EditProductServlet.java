@@ -22,21 +22,30 @@ public class EditProductServlet extends HttpServlet {
     private DataSource dbRes;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		doPost(request,response);
+		String idProd=(String)request.getParameter("produsId");
+		request.getSession().setAttribute("produsId", idProd);
 		request.getRequestDispatcher("editProduct.jsp").include(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idProd = (int)request.getSession().getAttribute("ProdID");
-		String pret=request.getParameter("pret");
-		String stoc=request.getParameter("stoc");
-		String descriere=request.getParameter("descriere");
-		String nrStoc=request.getParameter("nrStoc");
+//		if(request.getParameter("produsId")!=null)
+//		String idProd=(String)request.getParameter("produsId");
+		String idProd=(String)request.getSession().getAttribute("produsId");
+		request.getSession().removeAttribute("produsId");
+		String pret=(String)request.getParameter("pret");
+		String stoc=(String)request.getParameter("stoc");
+		String descriere=(String)request.getParameter("descriere");
+		String nrStoc=(String)request.getParameter("nrStoc");
+		System.out.println(pret+" "+stoc+" "+descriere+" "+nrStoc);
 		ProductDaoImpl productDaoImpl=new ProductDaoImpl();
 		Connection connection=null;
 		try{
 			connection=dbRes.getConnection();
 			if(pret.trim()!=""||stoc.trim()!=""||descriere.trim()!=""||nrStoc.trim()!="")
-				productDaoImpl.updateProductInfo(idProd, connection, pret, stoc, descriere, nrStoc);
+				productDaoImpl.updateProductInfo(Integer.parseInt(idProd), connection, pret, stoc, descriere, nrStoc);
 			request.getRequestDispatcher("products.jsp").forward(request, response);
 		}
 		catch (SQLException e) {
@@ -50,12 +59,12 @@ public class EditProductServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			else{
-			PrintWriter out=response.getWriter();
-			request.getRequestDispatcher("editProduct.jsp").include(request, response);  
-			out.print("Field not valid");
-			out.close();
-			return;
+				PrintWriter out=response.getWriter();
+				request.getRequestDispatcher("editProduct.jsp").include(request, response);  
+				out.print("Field not valid");
+				out.close();
+				return;
+			}
 		}
-	}
 	}
 }
