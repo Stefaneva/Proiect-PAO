@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -52,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 				User userInfo=userDaoImpl.getUserInfo(resultID,connection);
 				String role=userInfo.getUserRole();
 				session.setAttribute("userRole",role);
-				session.setAttribute("cos", new HashMap<Products,Integer>());
+				session.setAttribute("cos", new ConcurrentHashMap<Products,Integer>());
 				session.setAttribute("currentUser", userName);
 				session.setAttribute("UserID",resultID);
 				request.getRequestDispatcher("index.jsp").include(request, response);
