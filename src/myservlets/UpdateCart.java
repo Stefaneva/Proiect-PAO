@@ -1,6 +1,7 @@
 package myservlets;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,34 +20,64 @@ public class UpdateCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int prodId,quantity=0;
-//		if(request.getParameter("prodId")!=null)
-			 prodId=Integer.parseInt(request.getParameter("prodId"));
-		if(request.getParameter("quantity")!=null)
-			quantity=Integer.parseInt(request.getParameter("quantity"));
-		System.out.println(quantity);
-		ConcurrentHashMap<Products, Integer> cos = (ConcurrentHashMap<Products, Integer>) session.getAttribute("cos");
-		if(prodId>0){
-			for(Map.Entry<Products, Integer> entry:cos.entrySet())
-			{
-				if(entry.getKey().getIdProd()==prodId)
-					if(quantity>0){
-						cos.put(entry.getKey(),quantity);
-					}
-					else{
-						cos.remove(entry.getKey());
-					}
+		if(session.getAttribute("cartMessage")!=null)
+			session.removeAttribute("cartMessage");
+		prodId=Integer.parseInt(request.getParameter("prodId"));
+		try{
+			if(request.getParameter("quantity")!=null)
+				quantity=Integer.parseInt(request.getParameter("quantity"));
+//			System.out.println(quantity);
+			ConcurrentHashMap<Products, Integer> cos = (ConcurrentHashMap<Products, Integer>) session.getAttribute("cos");
+			if(prodId>0){
+				for(Map.Entry<Products, Integer> entry:cos.entrySet())
+				{
+					if(entry.getKey().getIdProd()==prodId)
+						if(quantity>0){
+							cos.put(entry.getKey(),quantity);
+						}
+						else{
+							cos.remove(entry.getKey());
+						}
+				}
+				response.sendRedirect("cart.jsp");
 			}
-			response.sendRedirect("cart.jsp");
+			else
+				response.sendRedirect("cart.jsp");
 		}
-		else
-			response.sendRedirect("cart.jsp");
-		
+		catch(NumberFormatException e){
+			e.printStackTrace();
+			System.out.println("Exceptie NumberFormatException");
+			response.sendRedirect("CartServlet?cartMessage="+URLEncoder.encode("Introduceti cantitatea corect!","UTF-8"));
+		}
 	}
+
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+//		int prodId,quantity=0;
+////		if(request.getParameter("prodId")!=null)
+//			 prodId=Integer.parseInt(request.getParameter("prodId"));
+//		if(request.getParameter("quantity")!=null)
+//			quantity=Integer.parseInt(request.getParameter("quantity"));
+//		System.out.println(quantity);
+//		ConcurrentHashMap<Products, Integer> cos = (ConcurrentHashMap<Products, Integer>) session.getAttribute("cos");
+//		if(prodId>0){
+//			for(Map.Entry<Products, Integer> entry:cos.entrySet())
+//			{
+//				if(entry.getKey().getIdProd()==prodId)
+//					if(quantity>0){
+//						cos.put(entry.getKey(),quantity);
+//					}
+//					else{
+//						cos.remove(entry.getKey());
+//					}
+//			}
+//			response.sendRedirect("cart.jsp");
+//		}
+//		else
+//			response.sendRedirect("cart.jsp");
+//		
+//	}
 
 }

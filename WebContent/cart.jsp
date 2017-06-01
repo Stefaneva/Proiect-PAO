@@ -16,6 +16,11 @@
   			<th> Pret </th>
   			<th> Descriere </th>
   			<th> Cantitate </th>
+  			<th>
+  				<c:if test="${not empty cartMessage}">
+					<c:out value="${cartMessage}"></c:out>
+				</c:if>
+  			</th>
   		</tr>
   		<c:forEach items="${cos}" var="product" >
 			<c:choose>
@@ -32,7 +37,7 @@
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.key.idProd}">Vezi detalii</a></td>
 		      <td><c:out value="${product.value}"></c:out></td>
 		      <td>
-		      	<form action="UpdateCart" method="post">
+		      	<form action="UpdateCart" method="get">
 					<br>Cantitate: <input type="text" name="quantity">
 					<input type="hidden" name="prodId" value="${product.key.idProd}">
 					<br><input type="submit" value="Actualizeaza">

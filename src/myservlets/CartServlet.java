@@ -28,9 +28,15 @@ public class CartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection connection=null;
+		String cartMessage;
 		HttpSession session = request.getSession();
 //		int userID=(int)session.getAttribute("UserID");
 		if(session.getAttribute("UserID")!=null){
+			if(request.getParameter("cartMessage")!=null)
+					{
+						cartMessage=(String)request.getParameter("cartMessage");
+						session.setAttribute("cartMessage",cartMessage);
+					}
 			String idProd=(String)request.getParameter("cumpara");
 			ConcurrentHashMap<Products, Integer> cos = (ConcurrentHashMap<Products, Integer>) session.getAttribute("cos");
 			if(idProd!=null){
