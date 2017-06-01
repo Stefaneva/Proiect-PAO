@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="TotalValue" value="${0}" />
 	<h2>Products </h2><br>
 	<table>
 		<tr>
@@ -17,6 +18,14 @@
   			<th> Cantitate </th>
   		</tr>
   		<c:forEach items="${cos}" var="product" >
+			<c:choose>
+				<c:when test="${product.value>1}">
+  					<c:set var="TotalValue" value="${TotalValue+product.value*product.key.pret}" />
+  				</c:when>
+  				<c:otherwise>
+  					<c:set var="TotalValue" value="${TotalValue+product.key.pret}" />
+  				</c:otherwise>
+  			</c:choose>
 		    <tr>
 		      <td><c:out value="${product.key.denumire}" />
 		      <td><c:out value="${product.key.pret}" /></td>
@@ -25,5 +34,6 @@
 		    </tr>
   		</c:forEach>
 	</table>
+	<h2>Total Value: <c:out value="${TotalValue}" /></h2>
 </body>
 </html>

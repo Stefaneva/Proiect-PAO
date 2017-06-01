@@ -25,7 +25,16 @@
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
-		      <td><a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a></td>
+		      <td><c:choose>
+		      		<c:when test="${sessionScope.UserID != null}">
+		      			<a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a>
+		      		</c:when>
+		      		<c:otherwise>
+		      			<a href= "index.jsp">Cumpara</a>
+
+   					</c:otherwise>
+   				</c:choose>
+		      </td>
 		      
 		    </tr>
   		</c:forEach>
