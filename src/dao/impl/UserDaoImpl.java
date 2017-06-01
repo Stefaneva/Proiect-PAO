@@ -7,47 +7,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-
-import connection.MyDBConnection;
 import entity.*;
 import dao.*;
 
 public class UserDaoImpl implements UserDAO{
 	
-	public List<User> getAllUsers()
-	{
-		List<User> userList=null;
-		try{
-			Connection connection;
-			MyDBConnection mdbc=new MyDBConnection();
-			mdbc.setConnection();
-			connection=mdbc.getConnection();
-			String sql="select USER_NAME,PASSWORD,EMAIL,ADDRESS,ID,USER_ROLE from USERS_PROJECT";
-			PreparedStatement pstm=connection.prepareStatement(sql);
-			ResultSet rs=pstm.executeQuery();		
-			userList=new ArrayList<>();
-			while(rs.next())
-			{
-				
-				System.out.println(rs.getString(1));
-				User user=new User();
-				user.setName(rs.getString("USER_NAME"));
-				user.setPassword(rs.getString("PASSWORD"));
-				user.setEmail(rs.getString("EMAIL"));
-				user.setAddress(rs.getString("ADDRESS"));
-				user.setId(rs.getInt("ID"));
-				user.setUserRole(rs.getString("USER_ROLE"));
-				userList.add(user);
-			}
-			mdbc.closeConnection();
-			
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return userList;
-	}
 	public User getUserInfo(int ID, Connection connection)
 	{
 		User userInfo=null;
