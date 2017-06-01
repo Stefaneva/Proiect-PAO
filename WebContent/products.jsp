@@ -27,7 +27,7 @@
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
 
 		      <td>
-		      <c:if test="${not empty UserID}"/>
+		      <c:if test="${not empty UserID}">
 		      	<c:choose>
 		      		 	<c:when test="${userRole!='admin'}">
 		      				<a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a>
@@ -36,6 +36,7 @@
 		      				<a href= "editProduct.jsp">Editare</a>
 		      			</c:otherwise>
 		      	</c:choose>
+		      </c:if>
 		      	<c:if test="${empty UserID}">
 		      		<a href= "index.jsp">Cumpara</a>
 		      	</c:if>
