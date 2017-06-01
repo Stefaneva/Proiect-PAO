@@ -25,6 +25,7 @@
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
+
 		      <td>
 		      <c:if test="${not empty UserID}"/>
 		      	<c:choose>
@@ -39,6 +40,7 @@
 		      		<a href= "index.jsp">Cumpara</a>
 		      	</c:if>
 		      </td>
+
 		    </tr>
   		</c:forEach>
 	</table>
