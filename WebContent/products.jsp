@@ -18,7 +18,14 @@
   			<th> Produs </th>
   			<th> Pret </th>
   			<th> Descriere </th>
-  			<th> Cumpara </th>
+  			<c:choose>
+		      	<c:when test="${userRole!='admin'}">
+		      		<th>Cumpara</th>
+		      	</c:when>
+		      	<c:otherwise>
+		      		<th>Editare</th>
+		      	</c:otherwise>
+		    </c:choose>
   		</tr>
   		<c:forEach items="${productList}" var="product" >
 		    <tr>
