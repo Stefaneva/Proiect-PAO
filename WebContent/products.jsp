@@ -33,7 +33,7 @@
 		      				<a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a>
 		      			</c:when>
 		      			<c:otherwise>
-		      				<a href= "editProduct.jsp">Editare</a>
+		      				<a href= "${pageContext.request.contextPath}/EditProductServlet?produse=${product.idProd}">Editare</a>
 		      			</c:otherwise>
 		      	</c:choose>
 		      </c:if>

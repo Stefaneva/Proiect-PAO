@@ -26,7 +26,8 @@ public class EditProductServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idProd = (int)request.getSession().getAttribute("ProdID");
+		System.out.println("ceva");
+		String idProd = request.getParameter("produse");
 		String pret=request.getParameter("pret");
 		String stoc=request.getParameter("stoc");
 		String descriere=request.getParameter("descriere");
@@ -43,6 +44,7 @@ public class EditProductServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		finally{
+			System.out.println("ceva");
 			if(connection!=null)
 				try {
 					connection.close();

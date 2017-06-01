@@ -145,11 +145,11 @@ public void saveProduct(Products productSaved, Connection connection)
 	}
 }
 
-public void updateProductInfo(int ID, Connection connection,String pret,String stoc,String descriere, String nrStoc){
+public void updateProductInfo(String idProd, Connection connection,String pret,String stoc,String descriere, String nrStoc){
 	try{
 		String sql=null;
 		if(stoc.trim()!=""){
-			sql="Update produsepao set Stoc='"+stoc+"' where id="+ID;
+			sql="Update produsepao set Stoc='"+stoc+"' where id="+idProd;
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			pstm.executeUpdate();
 		}
@@ -158,18 +158,18 @@ public void updateProductInfo(int ID, Connection connection,String pret,String s
 			sql="Update produsepao set pret=? where id=?";
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			pstm.setInt(1, Integer.parseInt(pret));
-			pstm.setString(2,Integer.toString(ID));
+			pstm.setString(2,Integer.toString(idProd));
 			pstm.executeUpdate();
 			}
 		if(nrStoc.trim()!=""){
 			sql="Update userspao set nrstoc=? where id=?";
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			pstm.setInt(1, Integer.parseInt(nrStoc));
-			pstm.setString(2,Integer.toString(ID));
+			pstm.setString(2,Integer.toString(idProd));
 			pstm.executeUpdate();
 		}
 		if(descriere.trim()!=""){
-			sql="Update produsepao set descriere='"+descriere+"' where id="+ID;
+			sql="Update produsepao set descriere='"+descriere+"' where id="+idProd;
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			pstm.executeUpdate();
 		}
