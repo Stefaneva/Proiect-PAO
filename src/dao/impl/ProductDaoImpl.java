@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-
 import dao.ProductDAO;
 import entity.Products;
 import entity.User;
@@ -142,6 +141,41 @@ public void saveProduct(Products productSaved, Connection connection)
 	}
 	catch(SQLException e)
 	{
+		e.printStackTrace();
+	}
+}
+
+public void updateProductInfo(int ID, Connection connection,String pret,String stoc,String descriere, String nrStoc){
+	try{
+		String sql=null;
+		if(stoc.trim()!=""){
+			sql="Update produsepao set Stoc='"+stoc+"' where id="+ID;
+			PreparedStatement pstm=connection.prepareStatement(sql);
+			pstm.executeUpdate();
+		}
+		if(pret.trim()!="")
+			{
+			sql="Update produsepao set pret=? where id=?";
+			PreparedStatement pstm=connection.prepareStatement(sql);
+			pstm.setInt(1, Integer.parseInt(pret));
+			pstm.setString(2,Integer.toString(ID));
+			pstm.executeUpdate();
+			}
+		if(nrStoc.trim()!=""){
+			sql="Update userspao set nrstoc=? where id=?";
+			PreparedStatement pstm=connection.prepareStatement(sql);
+			pstm.setInt(1, Integer.parseInt(nrStoc));
+			pstm.setString(2,Integer.toString(ID));
+			pstm.executeUpdate();
+		}
+		if(descriere.trim()!=""){
+			sql="Update produsepao set descriere='"+descriere+"' where id="+ID;
+			PreparedStatement pstm=connection.prepareStatement(sql);
+			pstm.executeUpdate();
+		}
+		System.out.println("Product Updated");
+	}
+	catch(SQLException e){
 		e.printStackTrace();
 	}
 }
