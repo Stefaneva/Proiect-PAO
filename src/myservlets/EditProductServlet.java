@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dao.impl.ProductDaoImpl;
+import validators.EditProductValidator;
 
 @WebServlet("/EditProductServlet")
 public class EditProductServlet extends HttpServlet {
@@ -42,28 +43,32 @@ public class EditProductServlet extends HttpServlet {
 		System.out.println(pret+" "+stoc+" "+descriere+" "+nrStoc);
 		ProductDaoImpl productDaoImpl=new ProductDaoImpl();
 		Connection connection=null;
-		try{
-			connection=dbRes.getConnection();
-			if(pret.trim()!=""||stoc.trim()!=""||descriere.trim()!=""||nrStoc.trim()!="")
-				productDaoImpl.updateProductInfo(Integer.parseInt(idProd), connection, pret, stoc, descriere, nrStoc);
-			request.getRequestDispatcher("products.jsp").forward(request, response);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally{
-			if(connection!=null)
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+		EditProductValidator validator=new EditProductValidator();
+		if(validator.validate(pret, stoc, descriere, nrStoc))
+		{
+			try{
+				connection=dbRes.getConnection();
+				if(pret.trim()!=""||stoc.trim()!=""||descriere.trim()!=""||nrStoc.trim()!="")
+					productDaoImpl.updateProductInfo(Integer.parseInt(idProd), connection, pret, stoc, descriere, nrStoc);
+				request.getRequestDispatcher("products.jsp").forward(request, response);
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally{
+				if(connection!=null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				else{
+					PrintWriter out=response.getWriter();
+					request.getRequestDispatcher("editProduct.jsp").include(request, response);  
+					out.print("Field not valid");
+					out.close();
+					return;
 				}
-			else{
-				PrintWriter out=response.getWriter();
-				request.getRequestDispatcher("editProduct.jsp").include(request, response);  
-				out.print("Field not valid");
-				out.close();
-				return;
 			}
 		}
 	}
