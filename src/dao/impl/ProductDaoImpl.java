@@ -149,27 +149,29 @@ public class ProductDaoImpl implements ProductDAO{
 		try{
 			String sql=null;
 			if(stoc.trim()!=""){
-				sql="Update produsepao set Stoc='"+stoc+"' where id="+ID;
+				sql="Update produsepao set Stoc=? where idprod=?";
 				PreparedStatement pstm=connection.prepareStatement(sql);
+				pstm.setString(1,stoc);
+				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
 			}
 			if(pret.trim()!="")
 				{
-				sql="Update produsepao set pret=? where id=?";
+				sql="Update produsepao set pret=? where idprod=?";
 				PreparedStatement pstm=connection.prepareStatement(sql);
 				pstm.setInt(1, Integer.parseInt(pret));
 				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
 				}
 			if(nrStoc.trim()!=""){
-				sql="Update userspao set nrstoc=? where id=?";
+				sql="Update produsepao set nrstoc=? where idprod=?";
 				PreparedStatement pstm=connection.prepareStatement(sql);
 				pstm.setInt(1, Integer.parseInt(nrStoc));
 				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
 			}
 			if(descriere.trim()!=""){
-				sql="Update produsepao set descriere='"+descriere+"' where id="+ID;
+				sql="Update produsepao set descriere='"+descriere+"' where idprod="+ID;
 				PreparedStatement pstm=connection.prepareStatement(sql);
 				pstm.executeUpdate();
 			}
