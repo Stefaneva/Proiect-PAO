@@ -9,12 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page = "categories.jsp" />
 	<jsp:include page="searchProducts.jsp" />
+	<jsp:include page = "categories.jsp" />
 	<div id = "products-container">
 	<h2>Products </h2><br>
 	<table>
-		<tr>
+  		<tr>
   			<th> Produs </th>
   			<th> Pret </th>
   			<th> Descriere </th>
@@ -25,8 +25,23 @@
 		      <td><c:out value="${product.denumire}" /></td>
 		      <td><c:out value="${product.pret}" /></td>
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.idProd}">Vezi detalii</a></td>
-		      <td><a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a></td>
-		      
+
+		      <td>
+		      <c:if test="${not empty UserID}">
+		      	<c:choose>
+		      		 	<c:when test="${userRole!='admin'}">
+		      				<a href= "${pageContext.request.contextPath}/CartServlet?cumpara=${product.idProd}">Cumpara</a>
+		      			</c:when>
+		      			<c:otherwise>
+		      				<a href= "editProduct.jsp">Editare</a>
+		      			</c:otherwise>
+		      	</c:choose>
+		      </c:if>
+		      	<c:if test="${empty UserID}">
+		      		<a href= "index.jsp">Cumpara</a>
+		      	</c:if>
+		      </td>
+
 		    </tr>
   		</c:forEach>
 	</table>

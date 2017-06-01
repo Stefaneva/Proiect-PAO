@@ -105,10 +105,9 @@ public class UserDaoImpl implements UserDAO{
 	public void saveUser(User userSaved, Connection connection)
 	{
 		try{
-			String sql="INSERT INTO USERSPAO(USERNAME,PASS,EMAIL,ADDRESS,PHONE,USERROLE)"//
+			String sql="INSERT INTO USERSPAO(USERNAME,PASS,EMAIL,ADDRESS,PHONE)"//
 						+ " VALUES('"+userSaved.getName()+"','"+userSaved.getPassword()+"','"//
-						+userSaved.getEmail()+"','"+userSaved.getAddress()+"',"+userSaved.getPhone()+",'"//
-						+userSaved.getUserRole()+"')";
+						+userSaved.getEmail()+"','"+userSaved.getAddress()+"',"+userSaved.getPhone()+")";
 			PreparedStatement pstm=connection.prepareStatement(sql);
 			pstm.executeUpdate();
 			System.out.println("SAVE USER TO DB");
