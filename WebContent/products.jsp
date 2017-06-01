@@ -38,7 +38,7 @@
 		      	</c:choose>
 		      </c:if>
 		      	<c:if test="${empty UserID}">
-		      		<a href= "index.jsp">Cumpara</a>
+		      		<a href= "index.jsp?message=Please+log+in+to+account+to+buy+products!">Cumpara</a>
 		      	</c:if>
 		      </td>
 

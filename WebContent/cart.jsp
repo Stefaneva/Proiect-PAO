@@ -31,9 +31,20 @@
 		      <td><c:out value="${product.key.pret}" /></td>
 		      <td><a href = "${pageContext.request.contextPath}/ProductDetailsServlet?produs=${product.key.idProd}">Vezi detalii</a></td>
 		      <td><c:out value="${product.value}"></c:out></td>
+		      <td>
+		      	<form action="UpdateCart" method="post">
+					<br>Cantitate: <input type="text" name="quantity">
+					<input type="hidden" name="prodId" value="${product.key.idProd}">
+					<br><input type="submit" value="Actualizeaza">
+				</form>
+		      </td>
+		      <td>
+		      	<a href="${pageContext.request.contextPath}/UpdateCart?prodId=${product.key.idProd}">Sterge</a>
+		      </td>
 		    </tr>
   		</c:forEach>
 	</table>
 	<h2>Total Value: <c:out value="${TotalValue}" /></h2>
+	<h2><a href = "${pageContext.request.contextPath}/ProductServlet">Continua Cumparaturile</a></h2>
 </body>
 </html>
