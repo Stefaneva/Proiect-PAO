@@ -36,12 +36,13 @@ public class LoginValidator {
 		}
 		return 0;
 	}*/
-	public int authentication(String userName,String password,Connection connection){
+	public int authentication(String userName,String password,Connection connection) throws SQLException{
+		PreparedStatement pstm=null;
 		if(userName!=null&&!(userName.trim().equals("")))
 		{
 			try{
 				String SQL="select USERNAME,PASS,ID from USERSPAO";
-				PreparedStatement pstm=connection.prepareStatement(SQL);
+				pstm=connection.prepareStatement(SQL);
 				ResultSet rs=pstm.executeQuery();
 				while(rs.next())
 				{
@@ -55,6 +56,9 @@ public class LoginValidator {
 			catch(SQLException e)
 			{
 				e.printStackTrace();
+			}
+			finally{
+				if(pstm!=null) pstm.close();
 			}
 		}
 		return 0;

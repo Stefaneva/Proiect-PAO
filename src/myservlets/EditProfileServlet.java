@@ -41,8 +41,8 @@ public class EditProfileServlet extends HttpServlet {
 		{
 			try{
 				connection=dbRes.getConnection();
-				if(password.trim()!=""||email.trim()!=""||phone.trim()!="")
-					userDaoImpl.updateUserInfo(userId, connection, password, email, phone);
+//				if(password.trim()!=""||email.trim()!=""||phone.trim()!="")
+				userDaoImpl.updateUserInfo(userId, connection, password, email, phone);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			catch (SQLException e) {

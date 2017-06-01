@@ -10,6 +10,13 @@ public class SignUpValidator {
 		if(!validator.isValid(email))
 			return false;
 		if(phone.length()!=10) return false;
+		try{
+			Integer.parseInt(phone);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 		if(pass.length()>40) return false;
 		return true;
 	}
