@@ -12,7 +12,7 @@ public class EditValidation {
 		if(pass.length()>40) return false;
 		if(phone.length()!=10) return false;
 		try{
-			Integer.parseInt(phone);
+			Long.parseLong((phone));
 		}
 		catch(Exception e){
 			e.printStackTrace();

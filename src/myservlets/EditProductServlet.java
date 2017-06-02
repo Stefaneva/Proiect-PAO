@@ -23,12 +23,9 @@ public class EditProductServlet extends HttpServlet {
     private DataSource dbRes;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		doPost(request,response);
 		String idProd=(String)request.getParameter("produsId");
 		request.getSession().setAttribute("produsId", idProd);
-		request.getRequestDispatcher("editProduct.jsp").include(request, response);
-		
+		request.getRequestDispatcher("editProduct.jsp").include(request, response);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +47,9 @@ public class EditProductServlet extends HttpServlet {
 				connection=dbRes.getConnection();
 				if(pret.trim()!=""||stoc.trim()!=""||descriere.trim()!=""||nrStoc.trim()!="")
 					productDaoImpl.updateProductInfo(Integer.parseInt(idProd), connection, pret, stoc, descriere, nrStoc);
-				request.getRequestDispatcher("products.jsp").forward(request, response);
+//				request.getRequestDispatcher("products.jsp").forward(request, response);
+				response.sendRedirect("ProductServlet");
+				return;
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -62,14 +61,14 @@ public class EditProductServlet extends HttpServlet {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-				else{
-					PrintWriter out=response.getWriter();
-					request.getRequestDispatcher("editProduct.jsp").include(request, response);  
-					out.print("Field not valid");
-					out.close();
-					return;
-				}
 			}
 		}
+		else{
+			PrintWriter out=response.getWriter();
+			request.getRequestDispatcher("editProduct.jsp").include(request, response);  	
+			out.print("Field not valid");
+			out.close();
+			return;
+		}	
 	}
 }

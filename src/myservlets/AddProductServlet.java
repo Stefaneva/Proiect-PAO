@@ -27,7 +27,9 @@ public class AddProductServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("addProduct.jsp").include(request, response); 
+		request.getRequestDispatcher("addProduct.jsp").include(request, response);
+		if(request.getSession().getAttribute("UserID")==null)
+			response.sendRedirect("index.jsp");
 	}
 
 	

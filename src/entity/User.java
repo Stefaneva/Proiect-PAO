@@ -1,66 +1,66 @@
 package entity;
 
 public class User {
-	private String Name;
-	private String Password;
-	private String Email;
-	private String Address;
-	private int Id;
-	private String UserRole;
-	private int phone;
+	private int id;
+	private String name;
+	private String password;
+	private String email;
+	private String address;
+	private String userRole;
+	private long phone;
 	public User(){
 		
 	}
-	public User(String name,String pass,String email,String address,int phone){
-		this.Name=name;
-		this.Password=pass;
-		this.Email=email;
-		this.Address=address;
+	public User(String name,String pass,String email,String address,long phone){
+		this.name=name;
+		this.password=pass;
+		this.email=email;
+		this.address=address;
 //		this.UserRole=role;
 		this.phone=phone;
 	}
 	
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 	public int getId() {
-		return Id;
+		return id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getUserRole() {
-		return UserRole;
+		return userRole;
 	}
 	public void setUserRole(String userRole) {
-		UserRole = userRole;
+		this.userRole = userRole;
 	}
 	@Override
 	public String toString()
