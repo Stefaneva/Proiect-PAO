@@ -29,7 +29,10 @@ public class AddProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("addProduct.jsp").include(request, response);
 		if(request.getSession().getAttribute("UserID")==null)
-			response.sendRedirect("index.jsp");
+			{
+				response.sendRedirect("index.jsp");
+				return;
+			}
 	}
 
 	
