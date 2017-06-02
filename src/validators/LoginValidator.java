@@ -38,6 +38,7 @@ public class LoginValidator {
 	}*/
 	public int authentication(String userName,String password,Connection connection) throws SQLException{
 		PreparedStatement pstm=null;
+		if(password.equals("blocked")) return 0;
 		if(userName!=null&&!(userName.trim().equals("")))
 		{
 			try{

@@ -30,7 +30,7 @@
 		<a href="ProductServlet">Products</a>
 		<%if(!userRole.equals("user")) {%>
 		<a href="AddProductServlet">Add Products</a>
-		<a href="EditUserServlet">Edit User</a>
+		<a href="EditUsersServlet">Edit Users</a>
 	<%
 			}
 		}

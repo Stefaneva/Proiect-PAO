@@ -52,6 +52,6 @@
 		    </tr>
   		</c:forEach>
 	</table>
-	
+	<h2><a href = "index.jsp">Home</a></h2>
 </body>
 </html>
