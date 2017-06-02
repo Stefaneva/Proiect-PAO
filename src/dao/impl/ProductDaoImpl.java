@@ -181,6 +181,7 @@ public class ProductDaoImpl implements ProductDAO{
 				pstm.setString(1,stoc);
 				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
+				pstm.close();
 			}
 			if(pret.trim()!="")
 				{
@@ -189,6 +190,7 @@ public class ProductDaoImpl implements ProductDAO{
 				pstm.setInt(1, Integer.parseInt(pret));
 				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
+				pstm.close();
 				}
 			if(nrStoc.trim()!=""){
 				sql="Update produsepao set nrstoc=? where idprod=?";
@@ -196,20 +198,36 @@ public class ProductDaoImpl implements ProductDAO{
 				pstm.setInt(1, Integer.parseInt(nrStoc));
 				pstm.setString(2,Integer.toString(ID));
 				pstm.executeUpdate();
+				pstm.close();
 			}
 			if(descriere.trim()!=""){
 				sql="Update produsepao set descriere='"+descriere+"' where idprod="+ID;
 				pstm=connection.prepareStatement(sql);
 				pstm.executeUpdate();
+				pstm.close();
 			}
 			System.out.println("Product Updated");
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		finally{
-			if(pstm!=null)
-				pstm.close();
-		}
 	}
+//	public ArrayList<String> getProductCategories(Connection connection) throws SQLException{
+//		PreparedStatement pstm=null;
+//		ArrayList<String> categoryList=new ArrayList<>();
+//		try{
+//			String sql="select * from categories";
+//			pstm=connection.prepareStatement(sql);
+//			ResultSet rs=pstm.executeQuery();
+//			while(rs.next())
+//				categoryList.add(rs.getString("numecategorie"));
+//		}
+//		catch(SQLException e){
+//			e.printStackTrace();
+//		}finally{
+//			if(pstm!=null)
+//				pstm.close();
+//		}
+//		return categoryList;
+//	}
 }
